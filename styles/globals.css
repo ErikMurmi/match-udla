@@ -1,9 +1,51 @@
+:root{
+  --light-background:#FF5858;
+  --dark-background:#000000;
+  --light-card-color:white;
+  --dark-card-color:#000000;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
+  background-color: var(--dark-card-color);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+#logo-img{
+  height: 20%;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  align-items: center;
+}
+#addInstalacion{
+  display: flex;
+  flex-direction: row;
+}
+
+#horizontal-flex{
+  display: flex;
+  flex-direction: row;
+}
+
+.reserva-container{
+  flex-wrap: wrap;
+}
+
+#vertical-flex{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cards-container{
+  flex-wrap: wrap; 
 }
 
 a {
@@ -15,12 +57,52 @@ a {
   box-sizing: border-box;
 }
 
+.instalacion-card{
+  background-color: var(--light-card-color);
+  border-radius: 15px;
+  width: 40%;
+  margin: 2%;
+  word-wrap: break-word;
+}
+
+.instalacion-container{
+  background-color: var(--light-card-color);
+  border-radius: 15px;
+  margin: 2%;
+}
+
+.desafio-container{
+  background-color: var(--light-background);
+  border-radius: 15px;
+}
+
+.instalacion-card:hover,.instalacion-container:hover{
+  cursor: pointer;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
   body {
     color: white;
-    background: black;
+    background-color: var(--dark-background);
+  }
+
+  #logo-img{
+    filter: invert(51%) sepia(41%) saturate(6352%) hue-rotate(332deg) brightness(114%) contrast(101%);
+  }
+  /* #logo-img{
+    filter:invert(1) ;
+    -webkit-filter: invert(1);
+  } */
+
+  .instalacion-card{
+    color: black;
+  }
+  
+  .instalacion-container{
+    color: black;
   }
 }
+
