@@ -1,22 +1,22 @@
-// const baseUrl = process.env.base_api_url
+const baseUrl = process.env.base_api_url
 
-export const deleteInstalacion = async(selectedItem)=>{
+export const deleteGestor = async(selectedUser)=>{
     try{
-      await fetch(`http://localhost:3000/api/instalaciones/${selectedItem._id}`,{
+      await fetch(`http://localhost:3000/api/gestores/${selectedUser._id}`,{
       method:"DELETE",})
     }catch (error){
       console.log(error)
     }
 }
 
-export const addInstalacion = async (newInstalacion)=>{
+export const registerGestor = async (newGestor)=>{
     try{
-        const res = await fetch('http://localhost:3000/api/instalaciones',{
+        const res = await fetch('http://localhost:3000/api/gestores',{
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
             },
-            body : JSON.stringify(newInstalacion)
+            body : JSON.stringify(newGestor)
         })
         return res
     }catch(error){
@@ -24,34 +24,26 @@ export const addInstalacion = async (newInstalacion)=>{
     }
   }
   
-export const updateInstalacion = async ({newInstalacion})=>{
+export const updateGestor = async ({query,newGestor})=>{
 try{
-    console.log('data controler: ',newInstalacion)
-    const res = await fetch('http://localhost:3000/api/instalaciones/'+newInstalacion._id,{
+    console.log('query controller',query)
+    await fetch('http://localhost:3000/api/gestores/'+query.id,{
         method:'PUT',
         headers:{
             "Content-Type":"application/json"
         },
-        body : JSON.stringify(newInstalacion)
+        body : JSON.stringify(newGestor)
     })
-    return res
     }catch(error){
         console.log(error)
     }
 }
 
-export const getInstalacion = async(query)=>{
-    const res = await fetch("http://localhost:3000/api/instalaciones/"+query.id)
+export const getGestor = async(query)=>{
+    const res = await fetch("http://localhost:3000/api/gestores/"+query.id)
     const data = await res.json()
     return data   
 }
-
-export const getInstalaciones = async()=>{
-    const res = await fetch("http://localhost:3000/api/instalaciones/")
-    const data = await res.json()
-    return data.length > 0? data:"Vacio"  
-}
-
 
 export const findUserByCredentials = async(credentials) =>{
     try{

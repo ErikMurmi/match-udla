@@ -9,14 +9,14 @@ export const deleteInstalacion = async(selectedItem)=>{
     }
 }
 
-export const addInstalacion = async (newInstalacion)=>{
+export const addReserva = async (newReserva)=>{
     try{
-        const res = await fetch('http://localhost:3000/api/instalaciones',{
+        const res = await fetch(baseUrl+'reservas',{
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
             },
-            body : JSON.stringify(newInstalacion)
+            body : JSON.stringify(newReserva)
         })
         return res
     }catch(error){

@@ -14,6 +14,10 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.page-container{
+ margin: 20px;
+}
+
 #logo-img{
   height: 20%;
 }
@@ -24,6 +28,19 @@ form{
   text-align: left;
   align-items: center;
 }
+
+#login-form{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  align-items: center;
+  gap: 20px;
+}
+
+#login-form label{
+  margin: -10px;
+}
+
 #addInstalacion{
   display: flex;
   flex-direction: row;
@@ -32,6 +49,12 @@ form{
 #horizontal-flex{
   display: flex;
   flex-direction: row;
+}
+
+.reserva-item{
+  display: flex;
+  flex-direction: row;
+  background-color: #FF5858;
 }
 
 .reserva-container{
@@ -71,7 +94,9 @@ a {
   margin: 2%;
 }
 
-.desafio-container{
+.desafio-item{
+  display: flex;
+  flex-direction: row;
   background-color: var(--light-background);
   border-radius: 15px;
 }

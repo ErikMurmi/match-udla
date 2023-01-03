@@ -1,0 +1,1 @@
+export const deportes = ['Fútbol','Basquet','Voley','Tennis']

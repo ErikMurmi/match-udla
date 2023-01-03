@@ -1,16 +1,16 @@
 import { Schema,model,models } from "mongoose";
 import mongoose from "mongoose";
  
-const reservaSchema = new Schema({
+const desafioSchema = new Schema({
     horario:{type:Array,validate:{ validator: function(v) {
         return v.length>0;
     },},required:[true,'Se debe tener un horario']},
-    fecha:{type:Date,required:[true,'Se debe tener una fecha']},
     usuario:{type:mongoose.ObjectId,required: [true, 'Se debe tener un usuario']},
-    instalacion:{type:mongoose.ObjectId,required: [true, 'Debe tener una instalacion']},
+    adversario:{type:mongoose.ObjectId},
+    reserva:{type:mongoose.ObjectId}
 },{
     timestamps:true,
     versionKey:false
 })
 
-export default models.Reserva || model('Reserva',reservaSchema,'reservas')
+export default models.Desafio || model('Desafio',desafioSchema,'desafios')

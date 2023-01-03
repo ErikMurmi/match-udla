@@ -1,13 +1,12 @@
 import { useState } from "react"
 import { addInstalacion } from "controllers/instalacionesController"
 import { useRouter } from "next/router"
-import { deportes } from "utils/deportes"
 
 export default function addNewInstalacion(){
 
     const router = useRouter()
     
-    //const deportes = ['Seleccione...','Fútbol','Basquet','Voley','Tennis']
+    const deportes = ['Seleccione...','Fútbol','Basquet','Voley','Tennis']
     const defaultHorarios = {
         lun_vie:{
             inicio:"",
@@ -71,7 +70,7 @@ export default function addNewInstalacion(){
                 break
 
         }
-
+        // setHorarios({ ...horarios, [name]: value })
     }
 
     const handleSubmit =async(form) =>{

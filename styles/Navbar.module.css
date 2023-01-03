@@ -1,0 +1,17 @@
+.navbar{
+ background-color:#ff5657 ;
+ height: 100%;
+}
+
+.navbar ul{
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0;
+  padding: 10px;
+
+}
+
+.navbar ul li{
+  font-weight: bold;
+}

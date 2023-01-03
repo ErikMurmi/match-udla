@@ -1,6 +1,5 @@
 import {dbConnect} from 'utils/mongoose'
-import Instalacion from 'models/Instalacion'
-import Reserva from 'models/Reserva'
+import Desafio from 'models/Desafio'
 
 dbConnect()
 
@@ -10,16 +9,16 @@ export default async function handler(req,res){
   switch(method){
     case "GET":
       try{
-        const instalaciones = await Instalacion.find()
-        return res.status(200).json(instalaciones)
+        const desafios = await Desafio.find()
+        return res.status(200).json(desafios)
       }catch(error){
         return res.status(500).json({error: error.message})
       }
     case "POST":
       try{
-        const newReserva = new Reserva(body)
-        const savedReserva = await newReserva.save()
-        return res.status(201).json(savedReserva)
+        const newDesafio = new Desafio(body)
+        const savedDesafio = await newDesafio.save()
+        return res.status(201).json(savedDesafio)
       }catch(error){
         return res.status(500).json({error: error.message})
       }

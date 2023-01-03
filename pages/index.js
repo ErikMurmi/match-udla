@@ -2,6 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Logo from 'images/playc-white-logo.png'
+import { signIn } from "next-auth/react"
+import SignIn from './auth/signin'
 
 export default function Home() {
   return (
@@ -15,10 +17,12 @@ export default function Home() {
       <main className={styles.main}>
         <Image id='logo-img' src={Logo} height={200}></Image>
 
-        <div className={styles.grid}>
-          <a href="/login" className={styles.card}>
+        {/* <div className={styles.grid}>
+          <a href="/auth/signin" className={styles.card}>
             <h2>Login</h2>
+            
           </a>
+          <button onClick={()=>{signIn();}}></button>
 
           <a href="/instalaciones" className={styles.card}>
             <h2>Core</h2>
@@ -29,12 +33,13 @@ export default function Home() {
           </a>
 
           <a
-            href="/admin"
+            href="/gestores/instalaciones"
             className={styles.card}
           >
             <h2>Admin</h2>
           </a>
-        </div>
+        </div> */}
+        <SignIn/>
       </main>
 
       <footer className={styles.footer}>
@@ -43,10 +48,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
+          Developed by Erik Murminacho{' '}
         </a>
       </footer>
     </div>

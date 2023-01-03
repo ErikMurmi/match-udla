@@ -1,4 +1,4 @@
-// const baseUrl = process.env.base_api_url
+const baseUrl = process.env.NEXT_PUBLIC_base_api_url
 
 export const deleteInstalacion = async(selectedItem)=>{
     try{
@@ -9,32 +9,31 @@ export const deleteInstalacion = async(selectedItem)=>{
     }
 }
 
-export const addInstalacion = async (newInstalacion)=>{
+export const addDesafio = async (newDesafio)=>{
     try{
-        const res = await fetch('http://localhost:3000/api/instalaciones',{
+        const res = await fetch('http://localhost:3000/api/desafios',{
             method:'POST',
             headers:{
                 "Content-Type":"application/json"
             },
-            body : JSON.stringify(newInstalacion)
+            body : JSON.stringify(newDesafio)
         })
         return res
     }catch(error){
         return {error:1,msg:error}
     }
-  }
+}
   
-export const updateInstalacion = async ({newInstalacion})=>{
+export const updateInstalacion = async ({query,newInstalacion})=>{
 try{
-    console.log('data controler: ',newInstalacion)
-    const res = await fetch('http://localhost:3000/api/instalaciones/'+newInstalacion._id,{
+    console.log('controler edit check ', newInstalacion ,'id:' ,query.id)
+    await fetch('http://localhost:3000/api/instalaciones/'+query.id,{
         method:'PUT',
         headers:{
             "Content-Type":"application/json"
         },
         body : JSON.stringify(newInstalacion)
     })
-    return res
     }catch(error){
         console.log(error)
     }
@@ -46,8 +45,8 @@ export const getInstalacion = async(query)=>{
     return data   
 }
 
-export const getInstalaciones = async()=>{
-    const res = await fetch("http://localhost:3000/api/instalaciones/")
+export const getDesafios = async()=>{
+    const res = await fetch("http://localhost:3000/api/desafios/")
     const data = await res.json()
     return data.length > 0? data:"Vacio"  
 }
