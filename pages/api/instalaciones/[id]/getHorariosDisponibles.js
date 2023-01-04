@@ -14,10 +14,9 @@ export default async function getHorariosDisponibles(req,res){
     horario = calcularHorario(instalacion,fecha)
     const response = await fetch(`${baseUrl}reservas/getByInstalacionAndFecha?fecha=${fecha}&id=${id}`)
     const reservas = await response.json()
-    console.log('reservas ',reservas)
+    //console.log('reservas ',reservas)
     const horariosDisponibles = calcularHorariosDisponibles(horario,reservas)
-    console.log('horariosDisponibles ',horariosDisponibles)
-    res.status(200).json(req.query)
+    res.status(200).json(horariosDisponibles)
 
 }
 
@@ -30,28 +29,21 @@ function calcularHorario(instalacion,fecha){
         hor = instalacion.horarios.finde
     }
     return hor
-    //calcularHorariosDisponibles(hor)
 }
 
 function calcularHorariosDisponibles(horario,reservas){
     const inicio = parseInt(horario.inicio.substring(0,3))
     const fin = parseInt(horario.fin.substring(0,3))
-    //console.log('reservas de este dia ', reservas)
     let disponibles = []
     for(let i = inicio ; i<fin ; i++){
         const hor = {inicio:`${i}:00`,fin:`${i +1}:00`}
-        if(reservas.find(reserva=>comprobarOcupada(reserva,i)))
-            console.log('encontre una reserva en este horario ',hor)
-        else
-            disponibles.push(hor)
+        if(!reservas.find(reserva=>comprobarOcupada(reserva,i)))
+            disponibles.push(hor)       
     }
-    //console.log('disponibles',disponibles)
-    //setHorariosDisponibles(disponibles)
     return disponibles
 }
 
 function comprobarOcupada(reserva,hora){
     const ocupada = reserva.horario.find((h)=>h.inicio===`${hora}:00`)
-    console.log('ocupada: ',ocupada, ` hora ${hora}:00`)
     return ocupada!==undefined
 }
