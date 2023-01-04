@@ -92,6 +92,7 @@ a {
   background-color: var(--light-card-color);
   border-radius: 15px;
   margin: 2%;
+  width: fit-content;
 }
 
 .desafio-item{

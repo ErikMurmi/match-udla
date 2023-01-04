@@ -8,6 +8,7 @@ const reservaSchema = new Schema({
     fecha:{type:Date,required:[true,'Se debe tener una fecha']},
     usuario:{type:mongoose.ObjectId,required: [true, 'Se debe tener un usuario']},
     instalacion:{type:mongoose.ObjectId,required: [true, 'Debe tener una instalacion']},
+    desafio:{type:Boolean,required:[true,'Se debe saber si esta abierta a desafio o no']},
 },{
     timestamps:true,
     versionKey:false

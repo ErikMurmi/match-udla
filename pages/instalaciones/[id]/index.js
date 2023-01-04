@@ -1,5 +1,4 @@
 import { getInstalacion,updateInstalacion } from "controllers/instalacionesController"
-import { set } from "mongoose"
 import { useState, useEffect} from "react"
 import { useRouter } from "next/router"
 import { InstalacionCard } from "components/instalacionCard"
@@ -18,7 +17,8 @@ export default function Instalacion(props){
         horario:[],
         usuario:'63463b29ea2bf5db90490593',
         fecha:fecha,
-        instalacion:props.Instalacion._id
+        instalacion:props.Instalacion._id,
+        desafio:desafio
     })
     const user = {_id:"63463b29ea2bf5db90490593",nombre:"Erik"}
 
@@ -26,26 +26,16 @@ export default function Instalacion(props){
         calcularHorario()
     },[fecha])
 
-    // useEffect(()=>{
-    //     if(horario)
-    //         calcularHorariosDisponibles()
-    // },[horario])
-
     function calcularHorario(){
         const dia = new Date(fecha).getDay()
         let hor = undefined
         if ( dia>=0 && dia<=4 ){
-            //console.log('semanal')
             hor = props.Instalacion.horarios.lun_vie
             setHorario(hor)
-            //calcularHorariosDisponibles()
         }else if (dia>4){
-            //console.log('finde')
-            // setHorario(props.Instalacion.horarios.finde)
             hor = props.Instalacion.horarios.finde
             setHorario(hor)
         }
-        // if(horario)
         calcularHorariosDisponibles(hor)
     }
 
@@ -53,7 +43,7 @@ export default function Instalacion(props){
         const inicio = parseInt(horario.inicio.substring(0,3))
         const fin = parseInt(horario.fin.substring(0,3))
         const reservas = props.Instalacion.reservas.filter((reserva)=>reserva.fecha === fecha) 
-        console.log('reservas de este dia ', reservas)
+        //console.log('reservas de este dia ', reservas)
         let disponibles = []
         for(let i = inicio ; i<fin ; i++){
             const hor = {inicio:`${i}:00`,fin:`${i +1}:00`}
@@ -61,9 +51,8 @@ export default function Instalacion(props){
                 console.log('encontre una reserva en este horario ',hor)
             else
                 disponibles.push(hor)
-            //console.log(`${i}:00-${i +1}:00`)
         }
-        //console.log('disponibles',disponibles)
+        console.log('disponibles',disponibles)
         setHorariosDisponibles(disponibles)
     }
 
@@ -74,6 +63,10 @@ export default function Instalacion(props){
         return ocupada!==undefined
     }
 
+    /**
+     * Actualiza la fecha de la reserva
+     * @param {e} elemento html que llama el metodo 
+     */
     const handleFechaChange = (e) => {
         const {value} = e.target
         //let f = new Date(value)
@@ -81,6 +74,10 @@ export default function Instalacion(props){
         //console.log('Fecha ', f.toISOString().substring(0,10))
     }
 
+    /**
+     * Actualiza el horario de la reserva al iteractuar los checkbox
+     * @param {e} elemento html que llama el metodo 
+     */
     const handleHoraReserva = (e) => {
         const {value,checked} = e.target
         const horario = JSON.parse(value)
@@ -107,32 +104,23 @@ export default function Instalacion(props){
             alert("Debes seleccionar un horario")
             return
         }
-        let instalacion = props.Instalacion
-        reserva.fecha = fecha
-        instalacion.reservas.push(reserva)
+        reserva.desafio = desafio
+        // let instalacion = props.Instalacion
+        // reserva.fecha = fecha
+        // instalacion.reservas.push(reserva)
         
         /**
          * Se comprueba si esta abierta a desafio para crear el objeto
          */
 
-        
+        console.log(reserva)
 
         //const result = await updateInstalacion({newInstalacion:instalacion})
         //console.log(result)
         const result = await addReserva(reserva)
-        console.log(result)
-        /**
-         * Se agrega el desafio
-         */
+
        
-        if(desafio){
-            console.log("desafio ", {horario:reserva.horario,
-                usuario:reserva.usuario,})
-            await addDesafio(
-                {horario:reserva.horario,
-                usuario:reserva.usuario,
-            })
-        }
+
         // if (result.ok)
         //     //router.push('/instalaciones')
         //     alert("reserva realizada")
@@ -141,21 +129,8 @@ export default function Instalacion(props){
         // }
     }
 
-    function consultarDesafios(){
-        const desafios = props.Instalacion.reservas.filter(reserva=>(reserva.abierta && reserva.adversario===""))
-        console.log('los desafios son :',desafios)
-        return desafios
-    }
-
     return(
         <div> 
-        <h3>Desafios disponibles</h3>
-        <div>
-            {/* {props.desafios.length>0?props.desafios.map((desafio,index)=>(
-                    <Desafio key={index} desafio={desafio} ></Desafio>
-            ))
-             :null} */}
-        </div>
         <form onSubmit={handleSubmitReserva}>
         <div id="horizontal-flex" className="reserva-container">
             <div  style={{width:"40%"}}>
@@ -191,8 +166,14 @@ export default function Instalacion(props){
 }
 
 export async function getServerSideProps({query:id}){
+    const baseUrl = process.env.NEXT_PUBLIC_base_api_url
+    const res = await fetch(`http://localhost:3000/api/reservas/getByInstalacionId?id=${id.id}`)
+    const reservas = await res.json()
+    console.log('reservas method ', reservas)
+    //console.log('reservas method ', id.id)
     const instalacion = await getInstalacion(id)
-    console.log(instalacion)
+    instalacion.reservas = reservas
+    //console.log(instalacion)
     return(
         {
             props:{

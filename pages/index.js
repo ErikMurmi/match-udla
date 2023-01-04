@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Logo from 'images/playc-white-logo.png'
 import { signIn } from "next-auth/react"
-import SignIn from './auth/signin'
+import SignIn from './signin'
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Image id='logo-img' src={Logo} height={200}></Image>
+        <Image id='logo-img' src={Logo} height={200} alt="app_logo"></Image>
 
         {/* <div className={styles.grid}>
           <a href="/auth/signin" className={styles.card}>
@@ -38,8 +38,8 @@ export default function Home() {
           >
             <h2>Admin</h2>
           </a>
-        </div> */}
-        <SignIn/>
+        </div> 
+        <SignIn/>*/}
       </main>
 
       <footer className={styles.footer}>

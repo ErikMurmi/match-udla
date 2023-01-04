@@ -41,7 +41,7 @@ export default function Instalaciones({Instalaciones}){
 
 export const getServerSideProps = async()=>{
     const instalaciones = await getInstalaciones()
-    console.log(instalaciones)
+    //console.log(instalaciones)
     return{
         props:{
             Instalaciones:instalaciones

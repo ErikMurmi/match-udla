@@ -1,4 +1,4 @@
-const baseUrl = process.env.base_api_url
+const baseUrl = process.env.NEXT_PUBLIC_base_api_url
 
 export const deleteGestor = async(selectedUser)=>{
     try{

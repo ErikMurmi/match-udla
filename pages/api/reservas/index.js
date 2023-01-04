@@ -1,11 +1,13 @@
 import {dbConnect} from 'utils/mongoose'
 import Instalacion from 'models/Instalacion'
 import Reserva from 'models/Reserva'
+import Desafio from 'models/Desafio'
 
 dbConnect()
 
 export default async function handler(req,res){
   const {method,body} = req
+  const baseUrl = process.env.NEXT_PUBLIC_base_api_url
 
   switch(method){
     case "GET":
@@ -19,6 +21,25 @@ export default async function handler(req,res){
       try{
         const newReserva = new Reserva(body)
         const savedReserva = await newReserva.save()
+        if(savedReserva.desafio){
+          const newDesafio = 
+            {
+              horario:savedReserva.horario,
+              usuario:savedReserva.usuario,
+              reserva:savedReserva._id
+            }
+          const response = await fetch(`${baseUrl}desafios`, {
+            method: "POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(newDesafio),
+          });
+          if (response.ok){
+            console.log('desafio creado', response.json())
+          }
+        }
+        console.log('reserva creada creado', savedReserva)
         return res.status(201).json(savedReserva)
       }catch(error){
         return res.status(500).json({error: error.message})

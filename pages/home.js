@@ -1,6 +1,6 @@
 import { getInstalaciones } from "controllers/instalacionesController"
 import mongoose from "mongoose"
-import SignIn from "./auth/signin"
+import SignIn from "./signin"
 
 export default function Home({Instalaciones}){
 
