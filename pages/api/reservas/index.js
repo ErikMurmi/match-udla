@@ -21,13 +21,17 @@ export default async function handler(req,res){
       try{
         const newReserva = new Reserva(body)
         const savedReserva = await newReserva.save()
+        
+        console.log('saved reserva', newReserva)
         if(savedReserva.desafio){
+          console.log('crear deasafio')
           const newDesafio = 
             {
               horario:savedReserva.horario,
               usuario:savedReserva.usuario,
               reserva:savedReserva._id
             }
+          console.log('desafio:',newDesafio)
           const response = await fetch(`${baseUrl}desafios`, {
             method: "POST",
             headers:{
@@ -35,6 +39,7 @@ export default async function handler(req,res){
             },
             body: JSON.stringify(newDesafio),
           });
+          console.log('response desafio:',response)
           if (response.ok){
             console.log('desafio creado', response.json())
           }

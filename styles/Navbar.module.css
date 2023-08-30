@@ -1,5 +1,5 @@
 .navbar{
- background-color:#ff5657 ;
+ background-color:orangered ;
  height: 100%;
 }
 
@@ -13,5 +13,17 @@
 }
 
 .navbar ul li{
-  font-weight: bold;
+  font-weight: 300;
+  font-size: 13px;
+  padding-inline: 2%;
+}
+
+.navbar li{
+  display: flex;
+  align-items: center;
+}
+
+.navbar li:hover {
+  border: 1px solid white;
+  border-radius: 20px;
 }

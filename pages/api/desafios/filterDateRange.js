@@ -1,6 +1,9 @@
 import Desafio from "models/Desafio"
 import Reserva from "models/Reserva"
 import Instalacion from "models/Instalacion"
+import { dbConnect } from "utils/mongoose"
+
+dbConnect()
 
 export default async function filterDateRange(req,res){
     let desafiosFiltro = []
@@ -10,13 +13,13 @@ export default async function filterDateRange(req,res){
         return
     }
 
-    const desafios = await Desafio.find()
+    const desafios = await Desafio.find({resultado:'none'})
     
     for (const desafio of desafios) {
         var reserva = await Reserva.findById(desafio.reserva,'fecha instalacion').exec()
         var reservaFecha = new Date(reserva.fecha).toISOString().substring(0,10)
         if(reservaFecha >= inicio && reservaFecha <= fin){
-            console.log("Fecha reserva: ", reservaFecha)
+            //console.log("Fecha reserva: ", reservaFecha)
             var instalacion = await Instalacion.findById(reserva.instalacion,'deporte').exec()
             if(instalacion.deporte ===deporte || deporte==="Todos"){
                 desafiosFiltro.push(desafio)

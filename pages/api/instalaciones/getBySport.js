@@ -1,4 +1,7 @@
 import Instalacion from "models/Instalacion"
+import { dbConnect } from "utils/mongoose"
+
+dbConnect()
 
 export default async function getBySport(req,res){
     let instalaciones = []

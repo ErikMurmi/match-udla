@@ -7,7 +7,7 @@ const desafioSchema = new Schema({
     },},required:[true,'Se debe tener un horario']},
     usuario:{type:mongoose.ObjectId,required: [true, 'Se debe tener un usuario']},
     adversario:{type:mongoose.ObjectId},
-    resultado:{type:String,default:'0-0'},
+    resultado:{type:String,default:'none'},
     ganador:{type:mongoose.ObjectId},
     reserva:{type:mongoose.ObjectId,required: [true, 'Debe estar asociado a una reserva']}
 },{

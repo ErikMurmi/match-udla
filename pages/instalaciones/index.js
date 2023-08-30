@@ -3,12 +3,14 @@ import { useRouter } from "next/router"
 import { deportes } from "utils/deportes"
 import { useState } from "react"
 import { InstalacionCard } from "components/instalacionCard"
+import useUser from "hooks/useUser"
 
 export default function Instalaciones({Instalaciones}){
 
     const router = useRouter()
+    // const user = useUser();
     const [listaInstalaciones,setInstalaciones] = useState(Instalaciones)
-    //console.log(Instalaciones)
+    
 
     async function handleChange(e){
         const {value} = e.target

@@ -1,12 +1,8 @@
-import Head from 'next/head'
+
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import Logo from 'images/playc-white-logo.png'
 import Basket from 'images/basket.png'
 import Futbol from 'images/futbol.jpg'
 import Mapache from 'images/mapache.jpg'
-import { signIn } from "next-auth/react"
-import SignIn from './admin/login'
 import { useRouter } from 'next/router'
 
 export default function Home() {
@@ -15,7 +11,7 @@ export default function Home() {
 
 
   function verCancha(campus,cancha){
-    router.push(`public/canchas?campus=${campus}&cancha=${cancha}`)
+    router.push(`admin/canchas?campus=${campus}&cancha=${cancha}`)
   }
 
   return (

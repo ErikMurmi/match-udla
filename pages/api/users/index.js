@@ -1,24 +1,28 @@
 import {dbConnect} from 'utils/mongoose'
-import Desafio from 'models/Desafio'
+import User from 'models/User'
 
 dbConnect()
 
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+
 export default async function handler(req,res){
   const {method,body} = req
-
+  /*
+    */
   switch(method){
     case "GET":
       try{
-        const desafios = await Desafio.find()
-        return res.status(200).json(desafios)
+        const users = await User.find()
+        return res.status(200).json(users)
       }catch(error){
         return res.status(500).json({error: error.message})
       }
     case "POST":
       try{
-        const newDesafio = new Desafio(body)
-        const savedDesafio = await newDesafio.save()
-        return res.status(200).json(savedDesafio)
+        console.log(body)
+        const newUser = new User(body)
+        const savedUser = await newUser.save()
+        return res.status(201).json(savedUser)
       }catch(error){
         return res.status(500).json({error: error.message})
       }
@@ -27,4 +31,5 @@ export default async function handler(req,res){
         msg:'This method does not exits'
       })
   }
+  console.log(req.method,req.url)
 }

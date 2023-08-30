@@ -1,7 +1,7 @@
 
 export const InstalacionCard=({instalacion,clicked})=>{
     return(
-    <div className="instalacion-container" style={{"width":"100%"}} onClick={clicked}>
+    <div className="instalacion-card" onClick={clicked}>
         <h2>{instalacion.titulo}</h2>
         <p>{instalacion.deporte}</p>
         <p>{instalacion.precio}</p>

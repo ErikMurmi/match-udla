@@ -1,26 +1,23 @@
 import Link from "next/link"
 import styles from '../styles/Navbar.module.css'
-import { signIn, useSession } from "next-auth/react"
+import Logo from 'images/udla_logo.png'
+import Image from "next/image"
 
 export const NavBar =()=>{
-    const { data: session } = useSession()
-
     return(
         <nav className={styles.navbar}>
-            <ul>
-            {session?null:<Link href='' onClick={()=>signIn()}>
-                <li>Login</li>
-            </Link>}
             
+            <ul style={{"alignItems":"center"}}>
+            <Image src={Logo} height={30} ></Image>
             <Link href='/'>
-                <li>Home</li>
+                <li>Inicio</li>
             </Link>
-            <Link href='/instalaciones'>
-                <li>Instalaciones</li>
-            </Link>
-            <Link href='/desafios'>
-                <li>Desafios</li>
-            </Link>
+                <Link href='/instalaciones'>
+                    <li>Udla Park</li>
+                </Link>
+                <Link href='/desafios'>
+                    <li>Granados</li>
+                </Link> 
             </ul>
         </nav>
     )

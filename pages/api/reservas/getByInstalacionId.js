@@ -1,4 +1,7 @@
 import Reserva from "models/Reserva"
+import { dbConnect } from "utils/mongoose"
+
+dbConnect()
 
 export default async function getByInstalacionId(req,res){
     const {id} = req.query

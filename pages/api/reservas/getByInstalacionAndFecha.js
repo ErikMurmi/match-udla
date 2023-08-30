@@ -1,7 +1,9 @@
 import Reserva from "models/Reserva"
+import { dbConnect } from "utils/mongoose"
+
+dbConnect()
 
 export default async function getByInstalacionAndFecha(req,res){
-    console.log('query ', req.query)
     const {id,fecha} = req.query
     if(!id){
         res.status(400).send("Se debe enviar un id")

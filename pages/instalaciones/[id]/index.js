@@ -3,6 +3,9 @@ import { useState, useEffect} from "react"
 import { useRouter } from "next/router"
 import { InstalacionCard } from "components/instalacionCard"
 import { addReserva } from "controllers/reservasController"
+import {getUserInfo} from "config/client"
+import useUser from "hooks/useUser"
+
 export default function Instalacion(props){
 
     const router = useRouter()
@@ -12,12 +15,13 @@ export default function Instalacion(props){
     const [desafio,setDesafio] = useState(false)
     const [reserva,setReserva] = useState({
         horario:[],
-        usuario:'63463b29ea2bf5db90490593',
+        usuario:'',
         fecha:fecha,
         instalacion:props.Instalacion._id,
         desafio:desafio
     })
-    const user = {_id:"63463b29ea2bf5db90490593",nombre:"Erik"}
+    const user = useUser()
+    //const user = {_id:"63463b29ea2bf5db90490593",nombre:"Erik"}
 
     useEffect(()=>{
         //calcularHorario()
@@ -35,6 +39,11 @@ export default function Instalacion(props){
         getHorariosDisponibles()
     },[fecha])
 
+
+    // async function getUserInfo(user){
+    //     const res = await fetch(`http://localhost:3000/api/users/getByFirebaseId?firebase=${user.uid}`)
+    //     return await res.json() 
+    // }
 
     /**
      * Actualiza la fecha de la reserva
@@ -71,6 +80,10 @@ export default function Instalacion(props){
 
     const handleSubmitReserva=async(form)=>{
         form.preventDefault()
+        
+        const userInfo = await getUserInfo(user)
+        reserva.usuario = userInfo._id
+        //console.log('userInfo',reserva)
         if(!horarioReserva.length>0){
             alert("Debes seleccionar un horario")
             return
@@ -81,10 +94,10 @@ export default function Instalacion(props){
          */
         const result = await addReserva(reserva)
 
-        if (result.ok)
-            //router.push('/instalaciones')
+        if (result.ok){
+            router.push('/instalaciones')
             alert("reserva realizada")
-        else{
+        }else{
             alert('No se pudo crear tu reserva')
         }
     }

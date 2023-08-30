@@ -1,8 +1,9 @@
-:root{
-  --light-background:#FF5858;
-  --dark-background:#000000;
-  --light-card-color:white;
-  --dark-card-color:#000000;
+:root {
+  --light-background: #FF5858;
+  --light-primary: #8d2232;
+  --dark-background: #000000;
+  --light-card-color: white;
+  --dark-card-color: #000000;
 }
 
 html,
@@ -10,26 +11,45 @@ body {
   padding: 0;
   margin: 0;
   background-color: var(--dark-card-color);
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
-.page-container{
- margin: 20px;
+.home {
+  display: flex;
 }
 
-#logo-img{
+.home-right {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.home-image-right {
+  width: 100%;
+  height: 50vh;
+}
+
+.home-image {
+  height: 100vh;
+  width: 50%;
+}
+
+.page-container {
+  margin: 20px;
+}
+
+#logo-img {
   height: 20%;
 }
 
-form{
+form {
   display: flex;
   flex-direction: column;
   text-align: left;
   align-items: center;
 }
 
-#login-form{
+#login-form {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -37,38 +57,103 @@ form{
   gap: 20px;
 }
 
-#login-form label{
+#login-form label {
   margin: -10px;
 }
 
-#addInstalacion{
+#addInstalacion {
   display: flex;
   flex-direction: row;
 }
 
-#horizontal-flex{
+#horizontal-flex {
   display: flex;
   flex-direction: row;
 }
 
-.reserva-item{
+.reserva-item {
   display: flex;
   flex-direction: row;
   background-color: #FF5858;
 }
 
-.reserva-container{
+.mid-dis-container {
   flex-wrap: wrap;
+  width: 50%;
+  align-items: center;
 }
 
-#vertical-flex{
+.horario,
+.horario-reserva {
+  background-color: white;
+  color: black;
+  width: fit-content;
+  border-radius: 15px;
+  padding: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.horario-reserva {
+  background-color: var(--light-primary);
+  color: white;
+}
+
+.reservar-btn {
+  padding: 2% 5%
+}
+
+.reservar-btn-modal,
+.cancelar-btn-modal {
+  padding: 4% 6%
+}
+
+.reservar-btn,
+.reservar-btn-modal,
+.cancelar-btn-modal {
+  background-color: var(--light-primary);
+  color: white;
+  width: fit-content;
+  border-radius: 15px;
+  border: none;
+
+}
+
+.cancelar-btn-modal {
+  background-color: black;
+}
+
+.fecha-selector {
+  background-color: white;
+  color: black;
+  border-radius: 15px;
+  padding: 3%;
+  border: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+
+.horarios-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+#vertical-flex {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.cards-container{
-  flex-wrap: wrap; 
+.cards-container {
+  flex-wrap: wrap;
 }
 
 a {
@@ -80,7 +165,7 @@ a {
   box-sizing: border-box;
 }
 
-.instalacion-card{
+.instalacion-card {
   background-color: var(--light-card-color);
   border-radius: 15px;
   width: 40%;
@@ -88,47 +173,115 @@ a {
   word-wrap: break-word;
 }
 
-.instalacion-container{
+.instalacion-card {
   background-color: var(--light-card-color);
   border-radius: 15px;
-  margin: 2%;
-  width: fit-content;
+  margin: 5%;
+  width: 70%;
+  padding: 5%;
 }
 
-.desafio-item{
-  display: flex;
-  flex-direction: row;
-  background-color: var(--light-background);
-  border-radius: 15px;
-}
-
-.instalacion-card:hover,.instalacion-container:hover{
+.instalacion-card:hover,
+.instalacion-container:hover {
   cursor: pointer;
 }
+
+
+/* Inicio de los estilos de la pantall modal */
+
+.solicitud-form {
+  background-color: white;
+  color: black;
+  width: 100%;
+  border-radius: 15px;
+  padding: 2%;
+}
+
+.solicitud-form h3,
+p {
+  margin: 0;
+}
+
+.solicitud-form label {
+  align-self: start;
+  font-weight: 500;
+  margin: 3% 0 2% 1%
+}
+
+.solicitud-form input,
+textarea {
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  padding: 2% 3%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.solicitud-form textarea {
+  resize: none;
+}
+
+.solicitud-form .options-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 6%;
+  width: 100%;
+  gap: 10%;
+}
+
+/* Pantallas mododales*/
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 35%;
+}
+
 
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background-color: var(--dark-background);
   }
 
-  #logo-img{
+  #logo-img {
     filter: invert(51%) sepia(41%) saturate(6352%) hue-rotate(332deg) brightness(114%) contrast(101%);
   }
+
   /* #logo-img{
     filter:invert(1) ;
     -webkit-filter: invert(1);
   } */
 
-  .instalacion-card{
+  .instalacion-card {
     color: black;
   }
-  
-  .instalacion-container{
+
+  .instalacion-container {
     color: black;
   }
 }
-

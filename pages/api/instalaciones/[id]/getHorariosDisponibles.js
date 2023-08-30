@@ -1,4 +1,7 @@
 import Instalacion from "models/Instalacion"
+import { dbConnect } from "utils/mongoose"
+
+dbConnect()
 
 export default async function getHorariosDisponibles(req,res){
     const baseUrl = process.env.NEXT_PUBLIC_base_api_url
