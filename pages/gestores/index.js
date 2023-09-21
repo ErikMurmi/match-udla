@@ -1,6 +1,4 @@
 import { dbConnect } from "utils/mongoose";
-import { unstable_getServerSession, useSession } from "next-auth/next";
-import { authOptions } from "pages/api/auth/[...nextauth]";
 import Gestor from "models/Gestor";
 
 dbConnect();
@@ -9,9 +7,6 @@ dbConnect();
 
 export default async function handler(req, res) {
   const { method, body } = req;
-  const session = await unstable_getServerSession(req, res, authOptions);
-  //const {status,data} = useSession()
-  console.log("La sesion es " + session);
   /*
    */
   switch (method) {
